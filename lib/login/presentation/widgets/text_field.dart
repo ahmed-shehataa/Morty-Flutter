@@ -8,15 +8,11 @@ class BaseTextField extends StatefulWidget {
   const BaseTextField(this.inputWrapper, {super.key});
 
   @override
-  State<BaseTextField> createState() => _BaseTextFieldState(inputWrapper);
+  State<BaseTextField> createState() => _BaseTextFieldState();
 }
 
 class _BaseTextFieldState extends State<BaseTextField> {
-  final InputWrapper inputWrapper;
   final _controller = TextEditingController();
-
-  _BaseTextFieldState(this.inputWrapper);
-
   var _errorText;
   var _passwordVisible = false;
 
@@ -38,7 +34,7 @@ class _BaseTextFieldState extends State<BaseTextField> {
     super.initState();
     _controller.addListener(() {
       setState(() {
-        switch (inputWrapper.onValueChange(_controller.text)) {
+        switch (widget.inputWrapper.onValueChange(_controller.text)) {
           case ValidationType.valid:
             _errorText = null;
           case ValidationType.inValid:
@@ -54,30 +50,30 @@ class _BaseTextFieldState extends State<BaseTextField> {
   Widget build(BuildContext context) {
     return TextFormField(
       obscureText:
-          (inputWrapper.fieldType == FieldType.password && !_passwordVisible),
+          (widget.inputWrapper.fieldType == FieldType.password && !_passwordVisible),
       controller: _controller,
-      keyboardType: inputWrapper.textInputType,
+      keyboardType: widget.inputWrapper.textInputType,
       textInputAction: TextInputAction.next,
       textAlign: TextAlign.start,
       maxLines: 1,
       decoration: InputDecoration(
-        suffixIcon: (inputWrapper.fieldType == FieldType.password)
+        suffixIcon: (widget.inputWrapper.fieldType == FieldType.password)
             ? passwordIcon()
             : null,
         errorText: _errorText,
         errorBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                width: inputWrapper.borderThickness,
-                color: inputWrapper.borderErrorColor),
+                width: widget.inputWrapper.borderThickness,
+                color: widget.inputWrapper.borderErrorColor),
             borderRadius:
-                BorderRadius.all(Radius.circular(inputWrapper.borderRadius))),
+                BorderRadius.all(Radius.circular(widget.inputWrapper.borderRadius))),
         border: OutlineInputBorder(
             borderSide: BorderSide(
-                width: inputWrapper.borderThickness,
-                color: inputWrapper.borderNormalColor),
+                width: widget.inputWrapper.borderThickness,
+                color: widget.inputWrapper.borderNormalColor),
             borderRadius:
-                BorderRadius.all(Radius.circular(inputWrapper.borderRadius))),
-        label: Text(inputWrapper.label),
+                BorderRadius.all(Radius.circular(widget.inputWrapper.borderRadius))),
+        label: Text(widget.inputWrapper.label),
       ),
     );
   }

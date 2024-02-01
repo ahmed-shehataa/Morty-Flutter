@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:morty_flutter/splash/presentation/screen/splash_screen.dart';
 import 'package:morty_flutter/user/di/user_di.dart';
-
-import 'morty/morty_screen.dart';
+import 'morty/presentation/screen/morty_screen.dart';
 
 void main() async {
   // Required for async calls in `main`
