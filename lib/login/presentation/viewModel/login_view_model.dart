@@ -6,10 +6,10 @@ class LoginViewModel {
   final LoginByEmailUseCase _loginByEmailUseCase;
   final SetUserDataUseCase _setUserDataUseCase;
 
-  const LoginViewModel({
-    required LoginByEmailUseCase loginByEmailUseCase,
-    required SetUserDataUseCase setUserDataUseCase,
-  })  : _setUserDataUseCase = setUserDataUseCase,
+  const LoginViewModel(
+    LoginByEmailUseCase loginByEmailUseCase,
+    SetUserDataUseCase setUserDataUseCase,
+  )   : _setUserDataUseCase = setUserDataUseCase,
         _loginByEmailUseCase = loginByEmailUseCase;
 
   loginByEmail(String email, String password) {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:morty_flutter/login/di/login_di.dart';
+import 'package:morty_flutter/di/app_module.dart';
 import 'package:morty_flutter/login/presentation/viewModel/login_view_model.dart';
 import 'package:morty_flutter/util/validation/input_wrapper.dart';
 import '../../../morty/presentation/screen/morty_screen.dart';
@@ -15,7 +15,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final LoginViewModel loginViewModel = LoginDI.getLoginVM();
+  final LoginViewModel loginViewModel = getIt.get();
   var _isEmailValid = false;
   var _isPassValid = false;
 
