@@ -15,7 +15,6 @@ class MortyItem extends StatelessWidget {
         onTap: () {},
         child: Container(
           padding: const EdgeInsets.all(20),
-          height: 120,
           width: double.infinity,
           child: Row(
             children: [
@@ -34,15 +33,26 @@ class MortyItem extends StatelessWidget {
                   },
                 ),
               ),
-              Text(
-                mortyUIModel.status,
-                style: const TextStyle(fontSize: 20),
-              ),
+              // TODO why?
+              Flexible(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      mortyUIModel.name,
+                      style: const TextStyle(fontSize: 22),
+                    ),
+                    Text(
+                      mortyUIModel.type,
+                      style: const TextStyle(fontSize: 20, color: Colors.red),
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
         ),
       ),
     );
-    ;
   }
 }

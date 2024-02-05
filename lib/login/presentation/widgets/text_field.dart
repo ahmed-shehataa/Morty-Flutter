@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:morty_flutter/util/validation/input_wrapper.dart';
-import 'package:morty_flutter/util/validation/validation.dart';
+
+import '../../../core/validation/input_wrapper.dart';
+import '../../../core/validation/validation.dart';
 
 class BaseTextField extends StatefulWidget {
   final InputWrapper inputWrapper;
@@ -49,8 +50,8 @@ class _BaseTextFieldState extends State<BaseTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      obscureText:
-          (widget.inputWrapper.fieldType == FieldType.password && !_passwordVisible),
+      obscureText: (widget.inputWrapper.fieldType == FieldType.password &&
+          !_passwordVisible),
       controller: _controller,
       keyboardType: widget.inputWrapper.textInputType,
       textInputAction: TextInputAction.next,
@@ -65,14 +66,14 @@ class _BaseTextFieldState extends State<BaseTextField> {
             borderSide: BorderSide(
                 width: widget.inputWrapper.borderThickness,
                 color: widget.inputWrapper.borderErrorColor),
-            borderRadius:
-                BorderRadius.all(Radius.circular(widget.inputWrapper.borderRadius))),
+            borderRadius: BorderRadius.all(
+                Radius.circular(widget.inputWrapper.borderRadius))),
         border: OutlineInputBorder(
             borderSide: BorderSide(
                 width: widget.inputWrapper.borderThickness,
                 color: widget.inputWrapper.borderNormalColor),
-            borderRadius:
-                BorderRadius.all(Radius.circular(widget.inputWrapper.borderRadius))),
+            borderRadius: BorderRadius.all(
+                Radius.circular(widget.inputWrapper.borderRadius))),
         label: Text(widget.inputWrapper.label),
       ),
     );

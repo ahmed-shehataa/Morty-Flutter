@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../util/images/images.dart';
+import '../../../core/common/constants/images.dart';
+
 
 class LoginImage extends StatelessWidget {
   const LoginImage({super.key});

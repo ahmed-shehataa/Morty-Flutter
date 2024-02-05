@@ -1,28 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:morty_flutter/base/pagination/base_paging_model.dart';
 import 'package:morty_flutter/base/pagination/base_paging_source.dart';
+import 'package:morty_flutter/base/pagination/paging_state.dart';
+import 'package:morty_flutter/core/network/util/handle_exception.dart';
 
-/// TODO
-/// handle exceptions
-/// handle loading
-/// make it more generic
-const _firstPageNumber = 1;
-
-enum PagingState {
-  idle,
-  loadingFirstPage,
-  loadingNextPage,
-  failureAtFirst,
-  failureAtNext,
-  reachedLastPage
-}
+import 'constants.dart';
 
 class BaseListView<T extends BasePagingModel> extends StatefulWidget {
   final BasePagingSource pagingSource;
   final Widget Function(BasePagingModel) item;
+  final Widget loadingWidget;
+  final Widget errorWidget;
+  final int pageSize;
 
-  const BaseListView(
-      {super.key, required this.pagingSource, required this.item});
+  const BaseListView({
+    required this.item,
+    required this.pagingSource,
+    this.pageSize = maxPageSize,
+    this.loadingWidget = const Center(child: CircularProgressIndicator()),
+    this.errorWidget = const Text("Error Loading this page, retry again!"),
+    super.key,
+  });
 
   @override
   State<BaseListView> createState() => _BaseListViewState();
@@ -34,31 +32,47 @@ class _BaseListViewState<T extends BasePagingModel>
 
   final List<BasePagingModel> _list = List.empty(growable: true);
 
-  final Widget _loadingWidget =
-      const Center(child: CircularProgressIndicator());
+  double _minHeight() {
+    return (_pagingState == PagingState.reachedLastPage) ? 0 : 80;
+  }
 
-  final Widget _errorWidget =
-      const Text("Error Loading first page, retry again!");
+  /// footer (loading - error)
+  Widget _footerWidget() {
+    if (_pagingState == PagingState.loadingNextPage) {
+      return widget.loadingWidget;
+    } else if (_pagingState == PagingState.failureAtNext) {
+      return widget.errorWidget;
+    } else {
+      return Container();
+    }
+  }
 
   Widget _bodyWidget() {
     if (_pagingState == PagingState.loadingFirstPage) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
+      return widget.loadingWidget;
     } else if (_pagingState == PagingState.failureAtFirst) {
-      return const Text("Error Loading first page, retry again!");
+      return Center(
+          child: GestureDetector(
+              onTap: () {
+                _loadNextPage();
+              },
+              child: widget.errorWidget));
     } else {
-      return ListView.builder(
+      // TODO why ?
+      return ListView(
         controller: _scrollController,
-        itemCount: _list.length,
-        itemBuilder: (context, index) {
-          return widget.item(_list[index]);
-          /*if (_pagingState == PagingState.loadingNextPage) {
-            const CircularProgressIndicator();
-          } else if (_pagingState == PagingState.failureAtNext) {
-            const Text("Error Loading next page, retry again!");
-          }*/
-        },
+        children: [
+          ListView.builder(
+            // TODO why ?
+            physics: const ScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: _list.length,
+            itemBuilder: (context, index) {
+              return widget.item(_list[index]);
+            },
+          ),
+          SizedBox(height: _minHeight(), child: Center(child: _footerWidget()))
+        ],
       );
     }
   }
@@ -91,8 +105,8 @@ class _BaseListViewState<T extends BasePagingModel>
   }
 
   void _loadNextPage() async {
-    if (_pagingState == PagingState.loadingFirstPage &&
-        _pagingState == PagingState.loadingNextPage &&
+    if (_pagingState == PagingState.loadingFirstPage ||
+        _pagingState == PagingState.loadingNextPage ||
         _pagingState == PagingState.reachedLastPage) {
       return;
     }
@@ -103,23 +117,38 @@ class _BaseListViewState<T extends BasePagingModel>
     }
 
     setState(() {
-      if (_currentPage == _firstPageNumber) {
+      if (_currentPage == firstPageNumber) {
         _pagingState = PagingState.loadingFirstPage;
       } else {
         _pagingState = PagingState.loadingNextPage;
       }
     });
 
-    var result = await widget.pagingSource.loadPage(_currentPage, 20);
-    _list.addAll(result);
+    var result = await widget.pagingSource
+        .loadPage(_currentPage, widget.pageSize)
+        .onResult();
 
-    setState(() {
-      if (result.isEmpty || result.length < 20) {
-        _pagingState = PagingState.reachedLastPage;
-      } else {
-        _pagingState = PagingState.idle;
-      }
-    });
+    result.fold(
+      (error) {
+        setState(() {
+          if (_currentPage == firstPageNumber) {
+            _pagingState = PagingState.failureAtFirst;
+          } else {
+            _pagingState = PagingState.failureAtNext;
+          }
+        });
+      },
+      (list) {
+        _list.addAll(list);
+        setState(() {
+          if (list.isEmpty || list.length < widget.pageSize) {
+            _pagingState = PagingState.reachedLastPage;
+          } else {
+            _pagingState = PagingState.idle;
+          }
+        });
+      },
+    );
   }
 
   @override

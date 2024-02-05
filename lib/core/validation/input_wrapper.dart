@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:morty_flutter/util/validation/validation.dart';
+import 'package:morty_flutter/core/validation/validation.dart';
 
 enum FieldType { text, email, password }
 
@@ -22,7 +22,7 @@ class InputWrapper {
 
   ValidationType onValueChange(String input) {
     text = input;
-    print("onValueChange:: " + text);
+    debugPrint("onValueChange:: $text");
     _checkValidation();
     _checkIsValid();
     return _validationType;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:morty_flutter/di/app_module.dart';
 import 'package:morty_flutter/login/presentation/viewModel/login_view_model.dart';
-import 'package:morty_flutter/util/validation/input_wrapper.dart';
+import '../../../core/validation/input_wrapper.dart';
 import '../../../morty/presentation/screen/morty_screen.dart';
 import '../widgets/login_button.dart';
 import '../widgets/login_image.dart';
@@ -63,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
           BaseTextField(passwordInputWrapper),
           const SizedBox(height: 10),
           LoginButton(_isLoginBtnEnabled(), () {
-            print("onLoginCLicked:: " + emailInputWrapper.text);
+            debugPrint("onLoginCLicked:: ${emailInputWrapper.text}");
             loginViewModel.loginByEmail(
                 emailInputWrapper.text, passwordInputWrapper.text);
             Navigator.pushReplacement(context,

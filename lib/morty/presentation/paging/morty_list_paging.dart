@@ -9,7 +9,7 @@ class MortyPagingSource extends BasePagingSource<MortyUIModel> {
   MortyPagingSource(this.getMortyListUseCase);
 
   @override
-  Future<List<MortyUIModel>> loadPage(int page, int size) {
+  Future<List<MortyUIModel>> loadPage(int page, int size) async {
     return getMortyListUseCase.execute(page, size).then(
       (list) {
         return list.map((e) => e.toUIModel()).toList();

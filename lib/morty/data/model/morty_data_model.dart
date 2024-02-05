@@ -1,5 +1,4 @@
-import 'character_location.dart';
-import 'character_origin.dart';
+import 'location.dart';
 
 class MortyDataModel {
   final int id;
@@ -8,8 +7,8 @@ class MortyDataModel {
   final String species;
   final String type;
   final String gender;
-  final CharacterOrigin origin;
-  final CharacterLocation location;
+  final Location origin;
+  final Location location;
   final String image;
   final List<String> episode;
   final String url;
@@ -22,8 +21,8 @@ class MortyDataModel {
     this.species = '',
     this.type = '',
     this.gender = '',
-    this.origin = const CharacterOrigin(name: '', url: ''),
-    this.location = const CharacterLocation(name: '', url: ''),
+    this.origin = const Location(name: '', url: ''),
+    this.location = const Location(name: '', url: ''),
     this.image = '',
     this.episode = const [],
     this.url = '',
@@ -38,13 +37,27 @@ class MortyDataModel {
       species: json['species'] as String,
       type: json['type'] as String,
       gender: json['gender'] as String,
-      origin: CharacterOrigin.fromJson(json['origin'] as Map<String, dynamic>),
-      location:
-          CharacterLocation.fromJson(json['location'] as Map<String, dynamic>),
+      origin: Location.fromJson(json['origin'] as Map<String, dynamic>),
+      location: Location.fromJson(json['location'] as Map<String, dynamic>),
       image: json['image'] as String,
       episode: List<String>.from(json['episode'] as List),
       url: json['url'] as String,
       created: json['created'] as String,
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "status": status,
+        "species": species,
+        "type": type,
+        "gender": gender,
+        "origin": origin.toJson(),
+        "location": location.toJson(),
+        "image": image,
+        "episode": episode.map((x) => x).toList(),
+        "url": url,
+        "created": created,
+      };
 }
