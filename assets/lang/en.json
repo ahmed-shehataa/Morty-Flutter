@@ -1,5 +1,7 @@
 {
   "email": "Email",
   "password": "Password",
-  "login": "Login"
+  "login": "Login",
+  "loading": "Loading..."
+
 }

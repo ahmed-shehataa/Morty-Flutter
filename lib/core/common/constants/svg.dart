@@ -1,4 +1,4 @@
-class ImagesRes {
+class SvgRes {
   static const _svg = ".svg";
   static const _svgSrc= "assets/svg";
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../core/common/constants/images.dart';
+import '../../../core/common/constants/svg.dart';
 
 
 class LoginImage extends StatelessWidget {
@@ -10,7 +10,7 @@ class LoginImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SvgPicture.asset(
-      ImagesRes.login,
+      SvgRes.login,
       width: 150,
       height: 150,
     );

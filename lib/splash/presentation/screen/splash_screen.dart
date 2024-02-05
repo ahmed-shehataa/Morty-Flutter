@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:morty_flutter/login/presentation/screen/login_screen.dart';
 
-import '../../../core/common/constants/images.dart';
+import '../../../core/common/constants/svg.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -15,7 +15,7 @@ class SplashScreen extends StatelessWidget {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const LoginScreen(),
+            builder: (context) => LoginScreen(),
           ));
     });
 
@@ -26,7 +26,7 @@ class SplashScreen extends StatelessWidget {
         ),
         Center(
           child: SvgPicture.asset(
-            ImagesRes.splash,
+            SvgRes.splash,
           ),
         )
       ],

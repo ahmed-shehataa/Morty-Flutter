@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:morty_flutter/login/presentation/screen/login_screen.dart';
-import 'package:morty_flutter/morty/presentation/screen/morty_screen.dart';
 
 import 'core/localization/constants.dart';
 import 'di/app_module.dart';
@@ -13,7 +12,6 @@ void main() async {
   await initGetIT();
   runApp(EasyLocalization(
       supportedLocales: supportedLocales,
-      startLocale: supportedLocales[1],
       path: localizationPath, // <-- change the path of the translation files
       child: const MyApp()));
 }
@@ -31,7 +29,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const LoginScreen(),
+      home: LoginScreen(),
     );
   }
 }

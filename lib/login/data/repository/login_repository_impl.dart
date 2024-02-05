@@ -8,7 +8,7 @@ class LoginRepositoryImpl implements LoginRepository {
   LoginRepositoryImpl(this.remote);
 
   @override
-  UserDataModel login(String email, String password) {
+  Future<UserDataModel> login(String email, String password) async {
     return remote.login(email, password);
   }
 }

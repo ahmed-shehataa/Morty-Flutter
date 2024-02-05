@@ -6,7 +6,7 @@ class LoginByEmailUseCase {
 
   LoginByEmailUseCase(this._repository);
 
-  UserDataModel execute(String email, String password) {
+  Future<UserDataModel> execute(String email, String password) async {
     return _repository.login(email, password);
   }
 }
