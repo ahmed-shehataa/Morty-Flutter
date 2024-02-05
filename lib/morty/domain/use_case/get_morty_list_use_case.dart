@@ -8,6 +8,8 @@ class GetMortyListUseCase {
   GetMortyListUseCase(this._repository);
 
   Future<List<MortyDomainModel>> execute(int page, int pageSize) {
-    return _repository.getMortyList(page, pageSize);
+    return Future(() {
+      return List.empty();
+    },);
   }
 }

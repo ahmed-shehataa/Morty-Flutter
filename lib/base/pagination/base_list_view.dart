@@ -6,6 +6,7 @@ import 'package:morty_flutter/base/pagination/base_paging_source.dart';
 import 'package:morty_flutter/base/pagination/paging_state.dart';
 import 'package:morty_flutter/core/network/util/handle_exception.dart';
 
+import 'base_empty_widget.dart';
 import 'constants.dart';
 
 class BaseListView<T extends BasePagingModel> extends StatefulWidget {
@@ -59,6 +60,8 @@ class _BaseListViewState<T extends BasePagingModel>
       return widget.loadingWidget;
     } else if (_pagingState == PagingState.failureAtFirst) {
       return Center(child: _errorWidget());
+    } else if (_list.isEmpty) {
+      return const Center(child: BaseEmptyWidget());
     } else {
       // TODO why ?
       return ListView(

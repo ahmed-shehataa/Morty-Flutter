@@ -4,6 +4,7 @@
   "login": "Login",
   "loading": "Loading...",
   "error_empty": "Can't be empty",
+  "empty_morty": "No morty found",
   "error_invalid": "Invalid",
   "retry": "Retry",
   "error_paging_loading": "Error Loading this page, retry again!",
