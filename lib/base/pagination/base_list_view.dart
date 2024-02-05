@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:morty_flutter/base/pagination/base_error_widget.dart';
 import 'package:morty_flutter/base/pagination/base_paging_model.dart';
 import 'package:morty_flutter/base/pagination/base_paging_source.dart';
 import 'package:morty_flutter/base/pagination/paging_state.dart';
@@ -10,7 +12,6 @@ class BaseListView<T extends BasePagingModel> extends StatefulWidget {
   final BasePagingSource pagingSource;
   final Widget Function(BasePagingModel) item;
   final Widget loadingWidget;
-  final Widget errorWidget;
   final int pageSize;
 
   const BaseListView({
@@ -18,7 +19,6 @@ class BaseListView<T extends BasePagingModel> extends StatefulWidget {
     required this.pagingSource,
     this.pageSize = maxPageSize,
     this.loadingWidget = const Center(child: CircularProgressIndicator()),
-    this.errorWidget = const Text("Error Loading this page, retry again!"),
     super.key,
   });
 
@@ -32,16 +32,23 @@ class _BaseListViewState<T extends BasePagingModel>
 
   final List<BasePagingModel> _list = List.empty(growable: true);
 
+  var _errorMessage;
+
   double _minHeight() {
     return (_pagingState == PagingState.reachedLastPage) ? 0 : 80;
   }
 
-  /// footer (loading - error)
+  Widget _errorWidget() {
+    return BaseErrorWidget(() {
+      _loadNextPage();
+    }, _errorMessage);
+  }
+
   Widget _footerWidget() {
     if (_pagingState == PagingState.loadingNextPage) {
       return widget.loadingWidget;
     } else if (_pagingState == PagingState.failureAtNext) {
-      return widget.errorWidget;
+      return _errorWidget();
     } else {
       return Container();
     }
@@ -51,12 +58,7 @@ class _BaseListViewState<T extends BasePagingModel>
     if (_pagingState == PagingState.loadingFirstPage) {
       return widget.loadingWidget;
     } else if (_pagingState == PagingState.failureAtFirst) {
-      return Center(
-          child: GestureDetector(
-              onTap: () {
-                _loadNextPage();
-              },
-              child: widget.errorWidget));
+      return Center(child: _errorWidget());
     } else {
       // TODO why ?
       return ListView(
@@ -130,6 +132,7 @@ class _BaseListViewState<T extends BasePagingModel>
 
     result.fold(
       (error) {
+        _errorMessage = error.message.tr();
         setState(() {
           if (_currentPage == firstPageNumber) {
             _pagingState = PagingState.failureAtFirst;

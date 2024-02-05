@@ -1,4 +1,4 @@
-import '../dio_response_messages.dart';
+import '../models/response_messages.dart';
 import '../enums/data_source.dart';
 import '../models/failure.dart';
 import '../models/response_codes.dart';
