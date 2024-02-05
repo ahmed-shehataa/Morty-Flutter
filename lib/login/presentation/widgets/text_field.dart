@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/validation/input_wrapper.dart';
@@ -39,9 +40,9 @@ class _BaseTextFieldState extends State<BaseTextField> {
           case ValidationType.valid:
             _errorText = null;
           case ValidationType.inValid:
-            _errorText = 'InValid';
+            _errorText = 'error_invalid'.tr();
           case ValidationType.empty:
-            _errorText = 'Can\'t be empty';
+            _errorText = 'error_empty'.tr();
         }
       });
     });

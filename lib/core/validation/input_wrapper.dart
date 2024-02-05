@@ -32,7 +32,7 @@ class InputWrapper {
     if (_validationType case ValidationType.valid) {
       isValid(true);
     } else {
-       isValid(false);
+      isValid(false);
     }
   }
 
@@ -64,5 +64,4 @@ class InputWrapper {
         }
     }
   }
-
 }

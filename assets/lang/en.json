@@ -2,6 +2,8 @@
   "email": "Email",
   "password": "Password",
   "login": "Login",
-  "loading": "Loading..."
+  "loading": "Loading...",
+  "error_empty": "Can't be empty",
+  "error_invalid": "Invalid"
 
 }
