@@ -8,6 +8,7 @@ import '../user/di/user_module.dart';
 final getIt = GetIt.instance;
 
 initGetIT() async {
+  // TODO why?
   await singletonModule();
   await userModule();
   await loginModule();

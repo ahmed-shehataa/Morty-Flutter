@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:morty_flutter/di/app_module.dart';
 import 'package:morty_flutter/login/presentation/viewModel/login_view_model.dart';
@@ -27,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     final emailInputWrapper = InputWrapper(
       FieldType.email,
-      "Email",
+      "email".tr(),
       TextInputType.emailAddress,
       TextInputAction.next,
       (isEmailValid) {
@@ -37,9 +38,10 @@ class _LoginScreenState extends State<LoginScreen> {
       },
     );
 
+
     final passwordInputWrapper = InputWrapper(
       FieldType.password,
-      "Password",
+      "password".tr(),
       TextInputType.visiblePassword,
       TextInputAction.done,
       (isPassValid) {
@@ -63,7 +65,6 @@ class _LoginScreenState extends State<LoginScreen> {
           BaseTextField(passwordInputWrapper),
           const SizedBox(height: 10),
           LoginButton(_isLoginBtnEnabled(), () {
-            debugPrint("onLoginCLicked:: ${emailInputWrapper.text}");
             loginViewModel.loginByEmail(
                 emailInputWrapper.text, passwordInputWrapper.text);
             Navigator.pushReplacement(context,

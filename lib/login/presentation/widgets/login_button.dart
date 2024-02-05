@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class LoginButton extends StatelessWidget {
@@ -23,9 +24,9 @@ class LoginButton extends StatelessWidget {
       child: TextButton(
         style: buttonStyle,
         onPressed: _isEnabled ? _onLogin : null,
-        child: const Text(
-          "Login",
-          style: TextStyle(color: Colors.white),
+        child: Text(
+          "login".tr(),
+          style: const TextStyle(color: Colors.white),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
