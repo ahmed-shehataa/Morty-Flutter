@@ -31,14 +31,9 @@ class BaseListView<T extends BasePagingModel> extends StatefulWidget {
 
 class _BaseListViewState<T extends BasePagingModel>
     extends State<BaseListView> {
-
   final List<BasePagingModel> _list = List.empty(growable: true);
 
   var _errorMessage;
-
-  double _minHeight() {
-    return (_pagingState == PagingState.reachedLastPage) ? 0 : 80;
-  }
 
   Widget _errorWidget() {
     return BaseErrorWidget(() {
@@ -64,21 +59,16 @@ class _BaseListViewState<T extends BasePagingModel>
     } else if (_list.isEmpty) {
       return const Center(child: BaseEmptyWidget());
     } else {
-      // TODO why ?
-      return ListView(
+      return ListView.builder(
         controller: widget.scrollController,
-        children: [
-          ListView.builder(
-            // TODO why ?
-            physics: const ScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: _list.length,
-            itemBuilder: (context, index) {
-              return widget.item(_list[index]);
-            },
-          ),
-          SizedBox(height: _minHeight(), child: Center(child: _footerWidget()))
-        ],
+        itemCount: _list.length + 1,
+        itemBuilder: (context, index) {
+          if (index != _list.length) {
+            return widget.item(_list[index]);
+          } else {
+            return _footerWidget();
+          }
+        },
       );
     }
   }
@@ -98,10 +88,11 @@ class _BaseListViewState<T extends BasePagingModel>
   void initState() {
     super.initState();
     widget.scrollController.addListener(
-          () {
+      () {
         if (widget.scrollController.hasClients &&
             widget.scrollController.position.pixels ==
-                widget.scrollController.position.maxScrollExtent) {
+                widget.scrollController.position.maxScrollExtent &&
+            widget.scrollController.position.atEdge) {
           _loadNextPage();
         }
       },
@@ -135,7 +126,7 @@ class _BaseListViewState<T extends BasePagingModel>
         .onResult();
 
     result.fold(
-          (error) {
+      (error) {
         _errorMessage = error.message.tr();
         setState(() {
           if (_currentPage == firstPageNumber) {
@@ -145,7 +136,7 @@ class _BaseListViewState<T extends BasePagingModel>
           }
         });
       },
-          (list) {
+      (list) {
         _list.addAll(list);
         setState(() {
           if (list.isEmpty || list.length < widget.pageSize) {

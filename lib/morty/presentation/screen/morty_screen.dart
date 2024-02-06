@@ -8,7 +8,7 @@ import '../widgets/morty_app_bar.dart';
 import '../widgets/morty_item.dart';
 
 class MortyScreen extends StatefulWidget {
-  MortyScreen({super.key});
+  const MortyScreen({super.key});
 
   @override
   State<MortyScreen> createState() => _MortyScreenState();

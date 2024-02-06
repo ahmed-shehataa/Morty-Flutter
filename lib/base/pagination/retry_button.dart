@@ -10,23 +10,20 @@ class RetryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final ButtonStyle buttonStyle = TextButton.styleFrom(
       elevation: 2,
-      backgroundColor: Colors.purple,
+      backgroundColor: Theme.of(context).colorScheme.error,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(6)),
+        borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
     );
 
-    return SizedBox(
-      height: 33,
-      child: TextButton(
-        style: buttonStyle,
-        onPressed: _onClicked,
-        child: Text(
-          "retry".tr(),
-          style: const TextStyle(color: Colors.white),
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        ),
+    return TextButton(
+      style: buttonStyle,
+      onPressed: _onClicked,
+      child: Text(
+        "retry".tr(),
+        style: const TextStyle(color: Colors.white),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
       ),
     );
   }

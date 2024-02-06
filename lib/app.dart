@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       theme: getThemeData(context),
-      home: MortyScreen(),
+      home: const MortyScreen(),
     );
   }
 }

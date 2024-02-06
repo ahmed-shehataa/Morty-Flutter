@@ -11,22 +11,24 @@ class BaseErrorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          SvgPicture.asset(
-            SvgRes.errorPlaceHolder,
-            width: 200,
-          ),
-          Container(
-              margin: const EdgeInsets.only(top: 8.0),
-              child: Text(_errorMessage)),
-          Container(
-            margin: const EdgeInsets.only(top: 8.0),
-            child: RetryButton(_onTry),
-          )
-        ],
-      ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SvgPicture.asset(
+          SvgRes.errorPlaceHolder,
+          width: 200,
+        ),
+        const SizedBox(height: 8),
+        Text(
+          _errorMessage,
+          style: Theme.of(context)
+              .textTheme
+              .labelLarge
+              ?.copyWith(color: Theme.of(context).colorScheme.error),
+        ),
+        const SizedBox(height: 8),
+        RetryButton(_onTry)
+      ],
     );
   }
 }
