@@ -3,6 +3,7 @@ import 'package:morty_flutter/base/pagination/base_list_view.dart';
 import 'package:morty_flutter/di/app_module.dart';
 import 'package:morty_flutter/morty/presentation/model/morty_ui_model.dart';
 
+import '../widgets/morty_app_bar.dart';
 import '../widgets/morty_item.dart';
 
 class MortyScreen extends StatelessWidget {
@@ -10,8 +11,16 @@ class MortyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-        child: BaseListView<MortyUIModel>(
+    final ScrollController scrollController = ScrollController();
+    return Scaffold(
+        appBar: MortyAppBar(
+          onSettingPressed: () {
+            // TODO open setting screen
+          },
+          scrollController: scrollController,
+        ),
+        body: BaseListView<MortyUIModel>(
+            scrollController: scrollController,
             pagingSource: getIt.get(),
             item: (model) {
               return MortyItem(

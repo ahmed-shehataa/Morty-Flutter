@@ -14,10 +14,12 @@ class BaseListView<T extends BasePagingModel> extends StatefulWidget {
   final Widget Function(BasePagingModel) item;
   final Widget loadingWidget;
   final int pageSize;
+  final ScrollController scrollController;
 
   const BaseListView({
     required this.item,
     required this.pagingSource,
+    required this.scrollController,
     this.pageSize = maxPageSize,
     this.loadingWidget = const Center(child: CircularProgressIndicator()),
     super.key,
@@ -29,7 +31,6 @@ class BaseListView<T extends BasePagingModel> extends StatefulWidget {
 
 class _BaseListViewState<T extends BasePagingModel>
     extends State<BaseListView> {
-  final ScrollController _scrollController = ScrollController();
 
   final List<BasePagingModel> _list = List.empty(growable: true);
 
@@ -65,7 +66,7 @@ class _BaseListViewState<T extends BasePagingModel>
     } else {
       // TODO why ?
       return ListView(
-        controller: _scrollController,
+        controller: widget.scrollController,
         children: [
           ListView.builder(
             // TODO why ?
@@ -96,11 +97,11 @@ class _BaseListViewState<T extends BasePagingModel>
   @override
   void initState() {
     super.initState();
-    _scrollController.addListener(
-      () {
-        if (_scrollController.hasClients &&
-            _scrollController.position.pixels ==
-                _scrollController.position.maxScrollExtent) {
+    widget.scrollController.addListener(
+          () {
+        if (widget.scrollController.hasClients &&
+            widget.scrollController.position.pixels ==
+                widget.scrollController.position.maxScrollExtent) {
           _loadNextPage();
         }
       },
@@ -134,7 +135,7 @@ class _BaseListViewState<T extends BasePagingModel>
         .onResult();
 
     result.fold(
-      (error) {
+          (error) {
         _errorMessage = error.message.tr();
         setState(() {
           if (_currentPage == firstPageNumber) {
@@ -144,7 +145,7 @@ class _BaseListViewState<T extends BasePagingModel>
           }
         });
       },
-      (list) {
+          (list) {
         _list.addAll(list);
         setState(() {
           if (list.isEmpty || list.length < widget.pageSize) {
@@ -167,8 +168,8 @@ class _BaseListViewState<T extends BasePagingModel>
 
   @override
   void dispose() {
-    _scrollController.removeListener(_loadNextPage);
-    _scrollController.dispose();
+    widget.scrollController.removeListener(_loadNextPage);
+    widget.scrollController.dispose();
     super.dispose();
   }
 }
