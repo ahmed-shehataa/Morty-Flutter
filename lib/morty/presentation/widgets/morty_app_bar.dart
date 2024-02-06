@@ -24,6 +24,7 @@ class _MortyAppBarState extends State<MortyAppBar> {
   bool isScrollingDown = false;
 
   _scrollListener() {
+    // hide app bar after scroll down
     if (widget.scrollController.position.userScrollDirection ==
         ScrollDirection.reverse) {
       if (!isScrollingDown) {
@@ -33,8 +34,10 @@ class _MortyAppBarState extends State<MortyAppBar> {
       }
     }
 
+    // show app bar after scroll up OR after first item becomes visible
     if (widget.scrollController.position.userScrollDirection ==
-        ScrollDirection.forward) {
+            ScrollDirection.forward ||
+        widget.scrollController.position.pixels == 0.0) {
       if (isScrollingDown) {
         isScrollingDown = false;
         _showAppbar = true;
@@ -55,6 +58,7 @@ class _MortyAppBarState extends State<MortyAppBar> {
       height: _showAppbar ? Scaffold.of(context).appBarMaxHeight : 0.0,
       duration: const Duration(milliseconds: 200),
       child: AppBar(
+        elevation: 2,
         title: Text(
           "morty_title".tr(),
           style: Theme.of(context).textTheme.displayMedium,
