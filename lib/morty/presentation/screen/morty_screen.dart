@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:morty_flutter/base/pagination/base_list_view.dart';
 import 'package:morty_flutter/di/app_module.dart';
 import 'package:morty_flutter/morty/presentation/model/morty_ui_model.dart';
@@ -15,7 +16,8 @@ class MortyScreen extends StatelessWidget {
     return Scaffold(
         appBar: MortyAppBar(
           onSettingPressed: () {
-            // TODO open setting screen
+            Fluttertoast.showToast(
+                msg: "TODO open setting screen", gravity: ToastGravity.CENTER);
           },
           scrollController: scrollController,
         ),
