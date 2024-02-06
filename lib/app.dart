@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:morty_flutter/login/presentation/screen/login_screen.dart';
 import 'package:morty_flutter/morty/presentation/screen/morty_screen.dart';
+import 'package:morty_flutter/theme/app_theme.dart';
 
 import 'core/localization/constants.dart';
 import 'di/app_module.dart';
@@ -13,7 +13,7 @@ void main() async {
   await initGetIT();
   runApp(EasyLocalization(
       supportedLocales: supportedLocales,
-      path: localizationPath, // <-- change the path of the translation files
+      path: localizationPath,
       child: const MyApp()));
 }
 
@@ -26,10 +26,7 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: getThemeData(context),
       home: const MortyScreen(),
     );
   }
