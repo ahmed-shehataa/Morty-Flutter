@@ -21,6 +21,9 @@ dependencies:
   provider: ^6.1.1
   google_fonts: ^6.1.0
   fluttertoast: ^8.2.4
+  sqflite: ^2.3.2
+  path: ^1.8.0
+
 
 dev_dependencies:
   flutter_test:

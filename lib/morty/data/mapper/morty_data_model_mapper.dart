@@ -11,7 +11,7 @@ extension MortyDataModelMapper on MortyDataModel {
         type: type,
         gender: gender,
         image: image,
-        episode: episode,
+        episode: episode.split(','),
         url: url,
         created: created);
   }

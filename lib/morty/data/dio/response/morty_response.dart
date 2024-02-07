@@ -17,7 +17,7 @@ class MortyResponse {
       mortyList: json["results"] == null
           ? []
           : List<MortyDataModel>.from(
-              json["results"]!.map((x) => MortyDataModel.fromJson(x))),
+              json["results"]!.map((x) => MortyDataModel.fromJsonRemote(x))),
     );
   }
 

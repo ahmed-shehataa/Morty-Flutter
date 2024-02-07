@@ -11,7 +11,7 @@ extension ExceptionHandling on Future<dynamic> {
       final response = await this;
       return Right(response);
     } catch (error) {
-      debugPrint("ExceptionHandling :: catch");
+      debugPrint("ExceptionHandling :: catch" + error.toString());
       return Left(ErrorHandler.handle(error).failure);
     }
   }
