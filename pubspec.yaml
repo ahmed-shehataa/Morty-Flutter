@@ -23,6 +23,7 @@ dependencies:
   fluttertoast: ^8.2.4
   sqflite: ^2.3.2
   path: ^1.8.0
+  internet_connection_checker: ^1.0.0+1
 
 
 dev_dependencies:

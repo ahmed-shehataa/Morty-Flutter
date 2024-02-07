@@ -14,10 +14,13 @@ import '../domain/repository/morty_repository.dart';
 mortyModule() {
   // data
   getIt.registerFactory(() => MortyService(getIt.get()));
-  getIt.registerFactory<MortyRemoteDataSource>(() => MortyRemoteDataSourceImpl(getIt.get()));
-  getIt.registerFactory<MortyLocalDataSource>(() => MortyLocalDataSourceImpl(getIt.get()));
+  getIt.registerFactory<MortyRemoteDataSource>(
+      () => MortyRemoteDataSourceImpl(getIt.get()));
+  getIt.registerFactory<MortyLocalDataSource>(
+      () => MortyLocalDataSourceImpl(getIt.get()));
 
-  getIt.registerFactory<MortyRepository>(() => MortyRepositoryImpl(getIt.get(), getIt.get()));
+  getIt.registerFactory<MortyRepository>(
+      () => MortyRepositoryImpl(getIt.get(), getIt.get(), getIt.get()));
 
   // domain
   getIt.registerFactory(() => GetMortyListUseCase(getIt.get()));

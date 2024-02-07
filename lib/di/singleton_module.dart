@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:morty_flutter/core/local/sql_lite.dart';
 import 'package:morty_flutter/di/app_module.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,8 +17,13 @@ singletonModule() async {
   getIt.registerLazySingleton<Dio>(() => DioClient.getInstance());
 
   // sqflite
-  getIt.registerSingletonAsync<Database>(() async {
+  getIt.registerSingletonAsync<Database>(
+    () async {
       return await SqliteService.initializeDB();
     },
   );
+
+  // InternetConnectionChecker
+  getIt.registerSingleton<InternetConnectionChecker>(
+      InternetConnectionChecker());
 }

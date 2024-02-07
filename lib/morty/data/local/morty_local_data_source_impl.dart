@@ -25,4 +25,9 @@ class MortyLocalDataSourceImpl implements MortyLocalDataSource {
           conflictAlgorithm: ConflictAlgorithm.replace);
     }
   }
+
+  @override
+  Future<void> clearAll() async {
+    await sqllite.rawDelete("delete from $mortyTableName");
+  }
 }
