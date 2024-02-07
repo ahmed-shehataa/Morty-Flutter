@@ -8,7 +8,7 @@ TextTheme getTextTheme(BuildContext context) {
         fontWeight: FontWeight.normal),
     bodyMedium: TextStyle(
         color: Theme.of(context).colorScheme.primary,
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: FontWeight.normal),
     bodyLarge: TextStyle(
         color: Theme.of(context).colorScheme.primary,

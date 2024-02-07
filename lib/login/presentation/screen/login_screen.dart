@@ -15,36 +15,38 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
+        color: Theme.of(context).colorScheme.background,
         child: Center(
             child: Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: ChangeNotifierProvider<LoginNotifier>(
-        create: (context) => LoginNotifier(getIt.get(), getIt.get()),
-        child: Consumer<LoginNotifier>(
-          builder: (BuildContext context, LoginNotifier value, Widget? child) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const LoginImage(),
-                const SizedBox(height: 10),
-                BaseTextField(value.emailInputWrapper),
-                const SizedBox(height: 10),
-                BaseTextField(value.passwordInputWrapper),
-                const SizedBox(height: 10),
-                LoginButton(value.isLoginBtnEnabled(), () async {
-                  context.showLoadingDialog();
-                  await value.loginByEmail();
-                  context.hideLoadingDialog();
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => MortyScreen()));
-                })
-              ],
-            );
-          },
-        ),
-      ),
-    )));
+          padding: const EdgeInsets.all(20.0),
+          child: ChangeNotifierProvider<LoginNotifier>(
+            create: (context) => LoginNotifier(getIt.get(), getIt.get()),
+            child: Consumer<LoginNotifier>(
+              builder:
+                  (BuildContext context, LoginNotifier value, Widget? child) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const LoginImage(),
+                    const SizedBox(height: 10),
+                    BaseTextField(value.emailInputWrapper),
+                    const SizedBox(height: 10),
+                    BaseTextField(value.passwordInputWrapper),
+                    const SizedBox(height: 10),
+                    LoginButton(value.isLoginBtnEnabled(), () async {
+                      context.showLoadingDialog();
+                      await value.loginByEmail();
+                      context.hideLoadingDialog();
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MortyScreen()));
+                    })
+                  ],
+                );
+              },
+            ),
+          ),
+        )));
   }
 }

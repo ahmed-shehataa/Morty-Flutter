@@ -22,7 +22,7 @@ class _BaseTextFieldState extends State<BaseTextField> {
     return IconButton(
         icon: Icon(
           _passwordVisible ? Icons.visibility : Icons.visibility_off,
-          color: Theme.of(context).primaryColorDark,
+          color: Theme.of(context).colorScheme.primary,
         ),
         onPressed: () {
           setState(() {
@@ -54,6 +54,10 @@ class _BaseTextFieldState extends State<BaseTextField> {
       obscureText: (widget.inputWrapper.fieldType == FieldType.password &&
           !_passwordVisible),
       controller: _controller,
+      style: Theme.of(context)
+          .textTheme
+          .bodyMedium
+          ?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
       keyboardType: widget.inputWrapper.textInputType,
       textInputAction: TextInputAction.next,
       textAlign: TextAlign.start,
@@ -63,19 +67,29 @@ class _BaseTextFieldState extends State<BaseTextField> {
             ? passwordIcon()
             : null,
         errorText: _errorText,
+        enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                width: widget.inputWrapper.borderThickness,
+                color: Theme.of(context).colorScheme.onPrimary)),
         errorBorder: OutlineInputBorder(
             borderSide: BorderSide(
                 width: widget.inputWrapper.borderThickness,
-                color: widget.inputWrapper.borderErrorColor),
+                color: Theme.of(context).colorScheme.onError),
             borderRadius: BorderRadius.all(
                 Radius.circular(widget.inputWrapper.borderRadius))),
         border: OutlineInputBorder(
             borderSide: BorderSide(
                 width: widget.inputWrapper.borderThickness,
-                color: widget.inputWrapper.borderNormalColor),
+                color: Theme.of(context).colorScheme.onPrimary),
             borderRadius: BorderRadius.all(
                 Radius.circular(widget.inputWrapper.borderRadius))),
-        label: Text(widget.inputWrapper.label),
+        label: Text(
+          widget.inputWrapper.label,
+          style: Theme.of(context)
+              .textTheme
+              .labelLarge
+              ?.copyWith(color: Theme.of(context).colorScheme.primary),
+        ),
       ),
     );
   }

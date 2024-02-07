@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:morty_flutter/login/presentation/screen/login_screen.dart';
 import 'package:morty_flutter/morty/presentation/screen/morty_screen.dart';
 import 'package:morty_flutter/theme/app_theme.dart';
 
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       theme: getThemeData(context),
-      home: const MortyScreen(),
+      home: const LoginScreen(),
     );
   }
 }
