@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:morty_flutter/morty/data/local/morty_local_data_source.dart';
 import 'package:morty_flutter/morty/data/mapper/morty_data_model_mapper.dart';
@@ -27,6 +28,9 @@ class MortyRepositoryImpl implements MortyRepository {
     }
 
     final localMortyList = await local.getMortyList(page, pageSize);
+    if (localMortyList.isEmpty) {
+      throw DioExceptionType.connectionError;
+    }
     return localMortyList.map((e) => e.toDomainModel()).toList();
   }
 }

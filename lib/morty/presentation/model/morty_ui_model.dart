@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:morty_flutter/base/pagination/base_paging_model.dart';
 
 class MortyUIModel extends BasePagingModel {
@@ -24,6 +25,12 @@ class MortyUIModel extends BasePagingModel {
     this.url = '',
     this.created = '',
   });
+
+  String getFormattedDate() {
+    DateTime dateTime = DateTime.parse(created);
+    String formattedDate = DateFormat.yMMMMd().add_jm().format(dateTime);
+    return formattedDate;
+  }
 
   factory MortyUIModel.fromJson(Map<String, dynamic> json) {
     return MortyUIModel(

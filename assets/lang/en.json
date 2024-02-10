@@ -18,7 +18,8 @@
   "error_noInternetConnection": "No Internet Connection",
   "error_default": "Unknown error",
   "error_cache": "Cache Error",
-  "morty_title": "Rick and Morty"
+  "morty_title": "Rick and Morty",
+  "setting": "Settings"
 
 
 }

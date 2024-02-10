@@ -4,7 +4,7 @@ import 'package:morty_flutter/base/pagination/base_error_widget.dart';
 import 'package:morty_flutter/base/pagination/base_paging_model.dart';
 import 'package:morty_flutter/base/pagination/base_paging_source.dart';
 import 'package:morty_flutter/base/pagination/paging_state.dart';
-import 'package:morty_flutter/core/network/util/handle_exception.dart';
+import 'package:morty_flutter/core/network/extensions/handle_exception.dart';
 
 import 'base_empty_widget.dart';
 import 'constants.dart';

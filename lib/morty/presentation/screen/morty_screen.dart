@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:morty_flutter/base/pagination/base_list_view.dart';
+import 'package:morty_flutter/core/extensions/strings.dart';
 import 'package:morty_flutter/di/app_module.dart';
 import 'package:morty_flutter/morty/presentation/model/morty_ui_model.dart';
 
+import '../../../morty_details/morty_details_screen.dart';
+import '../../../settings/setting_screen.dart';
 import '../widgets/morty_app_bar.dart';
 import '../widgets/morty_item.dart';
 
@@ -67,8 +70,8 @@ class _MortyScreenState extends State<MortyScreen> {
         ),
         appBar: MortyAppBar(
           onSettingPressed: () {
-            Fluttertoast.showToast(
-                msg: "TODO open setting screen", gravity: ToastGravity.CENTER);
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const SettingScreen()));
           },
           scrollController: scrollController,
         ),
@@ -78,6 +81,28 @@ class _MortyScreenState extends State<MortyScreen> {
             item: (model) {
               return MortyItem(
                 mortyUIModel: model as MortyUIModel,
+                onPressed: (morty) {
+                  showMaterialModalBottomSheet(
+                    elevation: 2,
+                    backgroundColor:
+                        Theme.of(context).colorScheme.primary.withOpacity(0.7),
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(20),
+                            topLeft: Radius.circular(20))),
+                    expand: false,
+                    context: context,
+                    builder: (context) => MortyDetailsScreen(
+                      mortyUIModel: morty,
+                      onClose: () {
+                        Navigator.pop(context);
+                      },
+                      onOpen: () {
+                        model.url.openURL();
+                      },
+                    ),
+                  );
+                },
               );
             }));
   }

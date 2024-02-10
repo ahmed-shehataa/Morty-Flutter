@@ -88,7 +88,7 @@ class _BaseTextFieldState extends State<BaseTextField> {
           style: Theme.of(context)
               .textTheme
               .labelLarge
-              ?.copyWith(color: Theme.of(context).colorScheme.primary),
+              ?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
         ),
       ),
     );

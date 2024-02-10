@@ -11,25 +11,23 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Timer(const Duration(seconds: 2), () {
+    Timer(const Duration(seconds: 20), () {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => LoginScreen(),
+            builder: (context) => const LoginScreen(),
           ));
     });
 
-    return Stack(
-      children: [
-        Container(
-          color: Colors.white,
+    return Container(
+      color: Colors.white,
+      child: Center(
+        child: SvgPicture.asset(
+          SvgRes.splash,
+          height: 200,
+          width: 200,
         ),
-        Center(
-          child: SvgPicture.asset(
-            SvgRes.splash,
-          ),
-        )
-      ],
+      ),
     );
   }
 }

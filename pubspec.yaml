@@ -24,6 +24,9 @@ dependencies:
   sqflite: ^2.3.2
   path: ^1.8.0
   internet_connection_checker: ^1.0.0+1
+  modal_bottom_sheet: ^3.0.0-pre
+  url_launcher: ^6.2.4
+  settings_ui: ^2.0.2
 
 
 dev_dependencies:

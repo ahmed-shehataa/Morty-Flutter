@@ -5,52 +5,67 @@ import 'package:morty_flutter/morty/presentation/model/morty_ui_model.dart';
 class MortyItem extends StatelessWidget {
   final MortyUIModel mortyUIModel;
 
-  const MortyItem({super.key, required this.mortyUIModel});
+  final Function(MortyUIModel) onPressed;
+
+  const MortyItem({super.key, required this.mortyUIModel, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
-      child: GestureDetector(
-        onTap: () {},
-        child: Container(
-          padding: const EdgeInsets.all(20),
-          width: double.infinity,
-          child: Row(
-            children: [
-              SizedBox(
-                width: 100,
-                height: 100,
-                child: CachedNetworkImage(
-                  imageUrl: mortyUIModel.image,
-                  placeholder: (context, url) =>
-                      const Center(child: CircularProgressIndicator()),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                  imageBuilder: (context, imageProvider) {
-                    return CircleAvatar(
-                      backgroundImage: imageProvider,
-                    );
-                  },
-                ),
+      onTap: () {
+        onPressed(mortyUIModel);
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: 80,
+              height: 80,
+              child: CachedNetworkImage(
+                imageUrl: mortyUIModel.image,
+                placeholder: (context, url) => const Icon(Icons.downloading),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+                imageBuilder: (context, imageProvider) {
+                  return CircleAvatar(
+                    backgroundImage: imageProvider,
+                  );
+                },
               ),
-              // TODO why?
-              Flexible(
+            ),
+            // TODO why?
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       mortyUIModel.name,
-                      style: const TextStyle(fontSize: 22),
+                      style: Theme.of(context).textTheme.bodyLarge,
                     ),
+                    if (mortyUIModel.type.isNotEmpty)
+                      Text(
+                        mortyUIModel.type,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Theme.of(context).colorScheme.onPrimary),
+                      ),
                     Text(
-                      mortyUIModel.type,
-                      style: const TextStyle(fontSize: 20, color: Colors.red),
+                      mortyUIModel.getFormattedDate(),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Theme.of(context).colorScheme.onPrimary),
                     ),
                   ],
                 ),
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
       ),
     );
