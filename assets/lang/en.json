@@ -19,7 +19,16 @@
   "error_default": "Unknown error",
   "error_cache": "Cache Error",
   "morty_title": "Rick and Morty",
-  "setting": "Settings"
+  "setting": "Settings",
+  "language": "Language",
+  "common": "Common",
+  "account": "Account",
+  "logout": "Logout",
+  "are_you_sure_logout": "Are you sure to logout?",
+  "dev": "Development",
+  "theme": "Theme",
+  "cancel": "Cancel",
+  "clear_cache": "Clear Cache"
 
 
 }
