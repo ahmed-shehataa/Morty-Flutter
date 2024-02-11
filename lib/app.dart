@@ -12,6 +12,7 @@ void main() async {
   // TODO why?
   await initGetIT();
   runApp(EasyLocalization(
+      startLocale: defaultLocal,
       supportedLocales: supportedLocales,
       path: localizationPath,
       child: const MyApp()));

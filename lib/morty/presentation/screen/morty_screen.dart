@@ -6,7 +6,7 @@ import 'package:morty_flutter/di/app_module.dart';
 import 'package:morty_flutter/morty/presentation/model/morty_ui_model.dart';
 
 import '../../../morty_details/morty_details_screen.dart';
-import '../../../settings/setting_screen.dart';
+import '../../../settings/presentation/screen/setting_screen.dart';
 import '../widgets/morty_app_bar.dart';
 import '../widgets/morty_item.dart';
 

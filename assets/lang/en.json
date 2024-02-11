@@ -28,6 +28,9 @@
   "dev": "Development",
   "theme": "Theme",
   "cancel": "Cancel",
+  "system": "system",
+  "light": "light",
+  "dark": "dark",
   "clear_cache": "Clear Cache"
 
 

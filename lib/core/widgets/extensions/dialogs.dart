@@ -36,7 +36,7 @@ extension LoadingDialog on BuildContext {
 }
 
 extension LogoutDialog on BuildContext {
-  showLogoutDialog() {
+  showLogoutDialog(VoidCallback onLogout ) {
     AlertDialog alert = AlertDialog(
       alignment: Alignment.center,
       title: Text(
@@ -60,7 +60,10 @@ extension LogoutDialog on BuildContext {
           titleColor: Theme.of(this).colorScheme.onError,
           backgroundColor: Theme.of(this).colorScheme.onSecondary,
         ),
-        BaseButton(title: "logout".tr(), onClicked: hideLogoutDialog),
+        BaseButton(title: "logout".tr(), onClicked: () {
+          hideLogoutDialog();
+          onLogout();
+        },),
       ],
     );
     showDialog(

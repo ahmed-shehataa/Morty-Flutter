@@ -10,7 +10,7 @@ const lightColors = ColorScheme(
   onError: Color(0xFFa11111),
   background: Color(0xFFF1F2F3),
   onBackground: Color(0xFFFFFFFF),
-  surface: Color(0xFFBB86FC),
+  surface: Color(0xFF505050),
   onSurface: Color(0xFF54B435),
 );
 
