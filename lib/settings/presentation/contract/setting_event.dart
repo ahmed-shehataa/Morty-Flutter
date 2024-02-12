@@ -12,6 +12,8 @@ class ChangeAppLocalEvent extends SettingEvent {
   ChangeAppLocalEvent({required this.appLocale});
 }
 
+class ClearCacheEvent extends SettingEvent {}
+
 class ChangeAppThemeEvent extends SettingEvent {
   final AppTheme appTheme;
 

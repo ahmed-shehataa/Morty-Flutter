@@ -9,5 +9,6 @@ settingModule() async {
         getIt.get(),
         getIt.get(),
         getIt.get(),
+        getIt.get(),
       ));
 }

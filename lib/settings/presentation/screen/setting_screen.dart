@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:morty_flutter/core/localization/language_local.dart';
 import 'package:morty_flutter/core/widgets/extensions/dialogs.dart';
 import 'package:morty_flutter/di/app_module.dart';
@@ -49,7 +50,8 @@ class SettingScreen extends StatelessWidget {
                         context.showLocalDialog(
                           state.appLocal,
                           (selectedLocale) {
-                            settingBloc.add(ChangeAppLocalEvent(appLocale: selectedLocale));
+                            settingBloc.add(
+                                ChangeAppLocalEvent(appLocale: selectedLocale));
                             context.setLocale(selectedLocale);
                           },
                         );
@@ -71,7 +73,10 @@ class SettingScreen extends StatelessWidget {
                     SettingsTile.navigation(
                       leading: const Icon(Icons.developer_mode),
                       title: Text("clear_cache".tr()),
-                      onPressed: (context) {},
+                      onPressed: (context) {
+                        settingBloc.add(ClearCacheEvent());
+                        Fluttertoast.showToast(msg: "Cache cleared ✅");
+                      },
                     ),
                   ],
                 ),
