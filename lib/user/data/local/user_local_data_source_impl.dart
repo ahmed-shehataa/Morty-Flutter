@@ -47,14 +47,13 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
   }
 
   @override
-  String getLocal() {
-    debugPrint("getLocal:: $defaultLocal");
-    return _pref.getString(_local) ?? defaultLocal.toString();
+  Locale getLocal() {
+    return Locale(_pref.getString(_local) ?? defaultLocal.languageCode);
   }
 
   @override
-  setLocal(String local) {
-    _pref.setString(_local, local);
+  setLocal(Locale local) {
+    _pref.setString(_local, local.languageCode);
   }
 
   @override

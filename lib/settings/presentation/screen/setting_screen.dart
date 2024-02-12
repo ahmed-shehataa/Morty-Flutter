@@ -44,8 +44,16 @@ class SettingScreen extends StatelessWidget {
                     SettingsTile.navigation(
                       leading: const Icon(Icons.language),
                       title: Text("language".tr()),
-                      value: Text(state.local.getDisplayLanguage()),
-                      onPressed: (context) {},
+                      value: Text(state.appLocal.getDisplayLanguage()),
+                      onPressed: (context) {
+                        context.showLocalDialog(
+                          state.appLocal,
+                          (selectedLocale) {
+                            settingBloc.add(ChangeAppLocalEvent(appLocale: selectedLocale));
+                            context.setLocale(selectedLocale);
+                          },
+                        );
+                      },
                     ),
                     SettingsTile.navigation(
                       onPressed: (context) {
@@ -63,9 +71,7 @@ class SettingScreen extends StatelessWidget {
                     SettingsTile.navigation(
                       leading: const Icon(Icons.developer_mode),
                       title: Text("clear_cache".tr()),
-                      onPressed: (context) {
-
-                      },
+                      onPressed: (context) {},
                     ),
                   ],
                 ),

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:morty_flutter/core/theme/constants.dart';
 import 'package:morty_flutter/user/data/local/user_local_data_source.dart';
 import 'package:morty_flutter/user/data/mapper/user_data_model_mapper.dart';
@@ -35,12 +37,12 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  String getLocal() {
+  Locale getLocal() {
     return _local.getLocal();
   }
 
   @override
-  setLocal(String local) {
+  setLocal(Locale local) {
     _local.setLocal(local);
   }
 

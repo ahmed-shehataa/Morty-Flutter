@@ -1,10 +1,19 @@
+import 'dart:ui';
+
+import 'package:morty_flutter/core/theme/constants.dart';
+
 abstract class SettingEvent {}
 
 class LogoutEvent extends SettingEvent {}
 
-class ChangeThemeEvent extends SettingEvent {
-  final bool isDark;
+class ChangeAppLocalEvent extends SettingEvent {
+  final Locale appLocale;
 
-  ChangeThemeEvent({required this.isDark});
+  ChangeAppLocalEvent({required this.appLocale});
+}
 
+class ChangeAppThemeEvent extends SettingEvent {
+  final AppTheme appTheme;
+
+  ChangeAppThemeEvent({required this.appTheme});
 }

@@ -18,7 +18,7 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
   SettingBloc(this._setUserLogoutUseCase, this._getLocalUseCase,
       this._setLocalUseCase, this._setThemeUseCase, this._getThemeUseCase)
       : super(SettingState(
-            local: _getLocalUseCase.execute(),
+            appLocal: _getLocalUseCase.execute(),
             appTheme: _getThemeUseCase.execute())) {
     on<LogoutEvent>(
       (event, emit) {
@@ -26,10 +26,13 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
         emit(state.copy(isLoggedOut: true));
       },
     );
-    on<ChangeThemeEvent>(
+    on<ChangeAppLocalEvent>(
       (event, emit) {
-
+        _setLocalUseCase.execute(event.appLocale);
       },
+    );
+    on<ChangeAppThemeEvent>(
+      (event, emit) {},
     );
   }
 }

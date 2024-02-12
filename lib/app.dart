@@ -13,7 +13,9 @@ void main() async {
   await initGetIT();
   runApp(EasyLocalization(
       startLocale: defaultLocal,
-      supportedLocales: supportedLocales,
+      supportedLocales: supportedAppLocales,
+      useOnlyLangCode: true,
+      saveLocale: true,
       path: localizationPath,
       child: const MyApp()));
 }

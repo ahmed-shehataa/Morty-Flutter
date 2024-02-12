@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:morty_flutter/user/domain/repository/user_repository.dart';
 
 class GetLocalUseCase {
@@ -5,7 +7,7 @@ class GetLocalUseCase {
 
   GetLocalUseCase(this._repository);
 
-  String execute() {
+  Locale execute() {
     return _repository.getLocal();
   }
 }

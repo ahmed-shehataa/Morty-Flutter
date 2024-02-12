@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:morty_flutter/user/domain/repository/user_repository.dart';
 
 class SetLocalUseCase {
@@ -5,7 +7,7 @@ class SetLocalUseCase {
 
   SetLocalUseCase(this._repository);
 
-  execute(String local) {
+  execute(Locale local) {
     _repository.setLocal(local);
   }
 }

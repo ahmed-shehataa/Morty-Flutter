@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import '../../../core/theme/constants.dart';
 import '../model/user_domain_model.dart';
 
@@ -6,13 +8,13 @@ abstract class UserRepository {
 
   logout();
 
-  setLocal(String local);
+  setLocal(Locale local);
 
   setTheme(AppTheme appTheme);
 
   AppTheme getTheme();
 
-  String getLocal();
+  Locale getLocal();
 
   bool isLoggedIn();
 

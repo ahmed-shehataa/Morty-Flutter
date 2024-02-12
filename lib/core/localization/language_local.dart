@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 class LanguageLocal {
   static final isoLangs = {
     "ab": {"name": "Abkhaz", "nativeName": "аҧсуа"},
@@ -210,10 +212,10 @@ class LanguageLocal {
   };
 }
 
-extension LanguageLocalExtension on String {
+extension LanguageLocalExtension on Locale {
   String getDisplayLanguage() {
-    if (LanguageLocal.isoLangs.containsKey(this)) {
-      return LanguageLocal.isoLangs[this]?["nativeName"] ?? "Local NotFound";
+    if (LanguageLocal.isoLangs.containsKey(languageCode)) {
+      return LanguageLocal.isoLangs[languageCode]?["nativeName"] ?? "Local NotFound";
     } else {
       return "Local Error";
     }

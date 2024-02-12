@@ -1,13 +1,15 @@
+import 'dart:ui';
+
 import 'package:morty_flutter/core/theme/constants.dart';
 
 class SettingState {
   final AppTheme appTheme;
-  final String local;
+  final Locale appLocal;
   final bool isLoggedOut;
   final bool isLoading;
 
   const SettingState({
-    required this.local,
+    required this.appLocal,
     required this.appTheme,
     this.isLoggedOut = false,
     this.isLoading = false,
@@ -15,12 +17,12 @@ class SettingState {
 
   SettingState copy({
     AppTheme? appTheme,
-    String? local,
+    Locale? appLocal,
     bool? isLoggedOut,
     bool? isLoading,
   }) {
     return SettingState(
-      local: local ?? this.local,
+      appLocal: appLocal ?? this.appLocal,
       appTheme: appTheme ?? this.appTheme,
       isLoggedOut: isLoggedOut ?? this.isLoggedOut,
       isLoading: isLoading ?? this.isLoading,
