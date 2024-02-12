@@ -61,15 +61,18 @@ class _MortyAppBarState extends State<MortyAppBar> {
         elevation: 2,
         title: Text(
           "morty_title".tr(),
-          style: Theme.of(context).textTheme.displayMedium,
+          style: Theme.of(context)
+              .textTheme
+              .displayMedium
+              ?.copyWith(color: Theme.of(context).colorScheme.primary),
         ),
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: Theme.of(context).colorScheme.background,
         actions: [
           IconButton(
             onPressed: widget.onSettingPressed,
             icon: Icon(
               Icons.settings,
-              color: Theme.of(context).colorScheme.background,
+              color: Theme.of(context).colorScheme.primary,
             ),
           )
         ],

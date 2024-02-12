@@ -18,8 +18,13 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
   final GetThemeUseCase _getThemeUseCase;
   final Database database;
 
-  SettingBloc(this._setUserLogoutUseCase, this._getLocalUseCase,
-      this._setLocalUseCase, this._setThemeUseCase, this._getThemeUseCase, this.database)
+  SettingBloc(
+      this._setUserLogoutUseCase,
+      this._getLocalUseCase,
+      this._setLocalUseCase,
+      this._setThemeUseCase,
+      this._getThemeUseCase,
+      this.database)
       : super(SettingState(
             appLocal: _getLocalUseCase.execute(),
             appTheme: _getThemeUseCase.execute())) {
@@ -35,7 +40,10 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
       },
     );
     on<ChangeAppThemeEvent>(
-      (event, emit) {},
+      (event, emit) {
+        _setThemeUseCase.execute(event.appTheme);
+        emit(state.copy(appTheme: event.appTheme));
+      },
     );
     on<ClearCacheEvent>(
       (event, emit) {

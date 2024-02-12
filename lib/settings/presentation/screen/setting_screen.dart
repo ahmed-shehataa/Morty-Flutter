@@ -10,6 +10,7 @@ import 'package:morty_flutter/settings/presentation/bloc/setting_bloc.dart';
 import 'package:morty_flutter/settings/presentation/contract/setting_event.dart';
 import 'package:settings_ui/settings_ui.dart';
 
+import '../../../app.dart';
 import '../contract/setting_state.dart';
 
 class SettingScreen extends StatelessWidget {
@@ -20,13 +21,16 @@ class SettingScreen extends StatelessWidget {
     final SettingBloc settingBloc = getIt.get();
     return Scaffold(
         appBar: AppBar(
-          leading: const BackButton(color: Colors.white),
+          leading: BackButton(color: Theme.of(context).colorScheme.primary),
           elevation: 2,
           title: Text(
             "setting".tr(),
-            style: Theme.of(context).textTheme.displayMedium,
+            style: Theme.of(context)
+                .textTheme
+                .displayMedium
+                ?.copyWith(color: Theme.of(context).colorScheme.primary),
           ),
-          backgroundColor: Theme.of(context).colorScheme.primary,
+          backgroundColor: Theme.of(context).colorScheme.background,
         ),
         body: BlocConsumer<SettingBloc, SettingState>(
           bloc: settingBloc,
@@ -59,11 +63,18 @@ class SettingScreen extends StatelessWidget {
                     ),
                     SettingsTile.navigation(
                       onPressed: (context) {
-                        //settingBloc.add(ChangeThemeEvent(isDark: value));
+                        context.showThemeDialog(
+                          state.appTheme,
+                          (appTheme) {
+                            settingBloc
+                                .add(ChangeAppThemeEvent(appTheme: appTheme));
+                            MyApp.of(context)!.changeTheme(appTheme);
+                          },
+                        );
                       },
                       leading: const Icon(Icons.format_paint),
                       title: Text("theme".tr()),
-                      value: Text(state.appTheme.name),
+                      value: Text(state.appTheme.getName()),
                     ),
                   ],
                 ),
