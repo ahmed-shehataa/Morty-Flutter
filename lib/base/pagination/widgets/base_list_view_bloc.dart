@@ -16,13 +16,13 @@ class BaseListViewBloc<T extends BasePagingModel> extends StatefulWidget {
   final Widget loadingWidget;
   final ScrollController scrollController;
 
-  const BaseListViewBloc({
+   BaseListViewBloc({
     required this.item,
     required this.pagingSource,
-    required this.scrollController,
     this.loadingWidget = const Center(child: CircularProgressIndicator()),
     super.key,
-  });
+    scrollController
+  }) : scrollController =  ScrollController();
 
   @override
   State<BaseListViewBloc> createState() => _BaseListViewState();
@@ -34,7 +34,7 @@ class _BaseListViewState<T extends BasePagingModel>
 
   Widget _errorWidget(BasePagingState state) {
     return BaseErrorWidget(() {
-      _loadNextPage();
+      _loadNextPageEvent();
     }, state.errorMessage);
   }
 
@@ -79,18 +79,17 @@ class _BaseListViewState<T extends BasePagingModel>
   void initState() {
     super.initState();
     basePagingBloc = BasePagingBloc(basePagingSource: widget.pagingSource);
+    _loadNextPageEvent();
     widget.scrollController.addListener(
       () {
         if (widget.scrollController.hasClients &&
             widget.scrollController.position.pixels ==
                 widget.scrollController.position.maxScrollExtent &&
             widget.scrollController.position.atEdge) {
-          _loadNextPage();
+          _loadNextPageEvent();
         }
       },
     );
-
-    _loadNextPage();
   }
 
   @override
@@ -112,7 +111,7 @@ class _BaseListViewState<T extends BasePagingModel>
     super.dispose();
   }
 
-  void _loadNextPage() {
+  void _loadNextPageEvent() {
     basePagingBloc.add(LoadNextPageEvent());
   }
 }
