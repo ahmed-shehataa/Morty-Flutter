@@ -10,8 +10,8 @@ class InputWrapper {
   final TextInputAction textInputAction;
   final Color borderErrorColor = Colors.red;
   final Color borderNormalColor = Colors.grey;
-  final double borderThickness = 2;
-  final double borderRadius = 6;
+  final double borderThickness = 1;
+  final double borderRadius = 12;
   final void Function(bool) isValid;
 
   ValidationType _validationType = ValidationType.empty;

@@ -6,10 +6,12 @@ class BaseButton extends StatelessWidget {
       required this.title,
       required void Function() onClicked,
       this.titleColor,
+      this.isEnabled = true,
       this.backgroundColor})
       : _onClicked = onClicked;
 
   final String title;
+  final bool isEnabled;
   final Color? titleColor;
   final Color? backgroundColor;
   final VoidCallback _onClicked;
@@ -21,6 +23,7 @@ class BaseButton extends StatelessWidget {
       backgroundColor: (backgroundColor != null)
           ? backgroundColor
           : Theme.of(context).colorScheme.error,
+      disabledBackgroundColor: Colors.grey,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
@@ -28,7 +31,7 @@ class BaseButton extends StatelessWidget {
 
     return TextButton(
       style: buttonStyle,
-      onPressed: _onClicked,
+      onPressed: isEnabled ? _onClicked : null,
       child: Text(
         title,
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(

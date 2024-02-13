@@ -29,7 +29,8 @@ class MortyRepositoryImpl implements MortyRepository {
 
     final localMortyList = await local.getMortyList(page, pageSize);
     if (localMortyList.isEmpty) {
-      throw DioExceptionType.connectionError;
+      throw DioException.connectionError(
+          requestOptions: RequestOptions(), reason: "No Local DB");
     }
     return localMortyList.map((e) => e.toDomainModel()).toList();
   }

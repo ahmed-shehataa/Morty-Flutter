@@ -64,7 +64,7 @@ class _MortyAppBarState extends State<MortyAppBar> {
           style: Theme.of(context)
               .textTheme
               .displayMedium
-              ?.copyWith(color: Theme.of(context).colorScheme.primary),
+              ?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
         ),
         backgroundColor: Theme.of(context).colorScheme.background,
         actions: [
@@ -72,7 +72,7 @@ class _MortyAppBarState extends State<MortyAppBar> {
             onPressed: widget.onSettingPressed,
             icon: Icon(
               Icons.settings,
-              color: Theme.of(context).colorScheme.primary,
+              color: Theme.of(context).colorScheme.onPrimary,
             ),
           )
         ],

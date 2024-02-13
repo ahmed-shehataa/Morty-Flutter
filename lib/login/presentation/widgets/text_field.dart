@@ -70,7 +70,9 @@ class _BaseTextFieldState extends State<BaseTextField> {
         enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
                 width: widget.inputWrapper.borderThickness,
-                color: Theme.of(context).colorScheme.onPrimary)),
+                color: Theme.of(context).colorScheme.onPrimary),
+            borderRadius: BorderRadius.all(
+                Radius.circular(widget.inputWrapper.borderRadius))),
         errorBorder: OutlineInputBorder(
             borderSide: BorderSide(
                 width: widget.inputWrapper.borderThickness,
@@ -80,7 +82,7 @@ class _BaseTextFieldState extends State<BaseTextField> {
         border: OutlineInputBorder(
             borderSide: BorderSide(
                 width: widget.inputWrapper.borderThickness,
-                color: Theme.of(context).colorScheme.onPrimary),
+                color: Theme.of(context).colorScheme.primary),
             borderRadius: BorderRadius.all(
                 Radius.circular(widget.inputWrapper.borderRadius))),
         label: Text(

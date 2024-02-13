@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/widgets/widgets/base_button.dart';
+
 class LoginButton extends StatelessWidget {
   const LoginButton(this._isEnabled, this._onLogin, {super.key});
 
@@ -9,27 +11,15 @@ class LoginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ButtonStyle buttonStyle = TextButton.styleFrom(
-      elevation: 2,
-      backgroundColor: Colors.purple,
-      disabledBackgroundColor: Colors.grey,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(6)),
-      ),
-    );
-
     return Container(
       width: double.infinity,
-      height: 50,
-      child: TextButton(
-        style: buttonStyle,
-        onPressed: _isEnabled ? _onLogin : null,
-        child: Text(
-          "login".tr(),
-          style: const TextStyle(color: Colors.white),
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        ),
+      height: 58,
+      child: BaseButton(
+        title: "login".tr(),
+        isEnabled: _isEnabled,
+        onClicked: _onLogin,
+        titleColor: Theme.of(context).colorScheme.onSecondary,
+        backgroundColor: Theme.of(context).colorScheme.primary,
       ),
     );
   }

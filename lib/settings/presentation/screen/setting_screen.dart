@@ -21,14 +21,14 @@ class SettingScreen extends StatelessWidget {
     final SettingBloc settingBloc = getIt.get();
     return Scaffold(
         appBar: AppBar(
-          leading: BackButton(color: Theme.of(context).colorScheme.primary),
+          leading: BackButton(color: Theme.of(context).colorScheme.onPrimary),
           elevation: 2,
           title: Text(
             "setting".tr(),
             style: Theme.of(context)
                 .textTheme
                 .displayMedium
-                ?.copyWith(color: Theme.of(context).colorScheme.primary),
+                ?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
           ),
           backgroundColor: Theme.of(context).colorScheme.background,
         ),
@@ -42,6 +42,14 @@ class SettingScreen extends StatelessWidget {
           },
           builder: (BuildContext context, SettingState state) {
             return SettingsList(
+              lightTheme: SettingsThemeData(
+                  titleTextColor: Theme.of(context).colorScheme.onPrimary,
+                  settingsListBackground:
+                      Theme.of(context).colorScheme.background),
+              darkTheme: SettingsThemeData(
+                  titleTextColor: Theme.of(context).colorScheme.onPrimary,
+                  settingsListBackground:
+                      Theme.of(context).colorScheme.background),
               sections: [
                 SettingsSection(
                   title: Text("common".tr()),
