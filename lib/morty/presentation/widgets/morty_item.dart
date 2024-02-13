@@ -7,7 +7,8 @@ class MortyItem extends StatelessWidget {
 
   final Function(MortyUIModel) onPressed;
 
-  const MortyItem({super.key, required this.mortyUIModel, required this.onPressed});
+  const MortyItem(
+      {super.key, required this.mortyUIModel, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +45,8 @@ class MortyItem extends StatelessWidget {
                   children: [
                     Text(
                       mortyUIModel.name,
-                      style: Theme.of(context).textTheme.bodyLarge,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: Theme.of(context).colorScheme.onPrimary),
                     ),
                     if (mortyUIModel.type.isNotEmpty)
                       Text(
@@ -58,7 +60,7 @@ class MortyItem extends StatelessWidget {
                       mortyUIModel.getFormattedDate(),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: Theme.of(context).colorScheme.onPrimary),
                     ),
                   ],

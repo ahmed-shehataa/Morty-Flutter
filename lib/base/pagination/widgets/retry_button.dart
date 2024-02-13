@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-import '../../core/widgets/widgets/base_button.dart';
+import '../../../core/widgets/widgets/base_button.dart';
 
 class RetryButton extends StatelessWidget {
   const RetryButton(this._onClicked, {super.key});

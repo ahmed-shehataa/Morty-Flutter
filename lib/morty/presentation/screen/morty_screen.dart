@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:morty_flutter/base/pagination/base_list_view.dart';
 import 'package:morty_flutter/core/extensions/strings.dart';
 import 'package:morty_flutter/di/app_module.dart';
 import 'package:morty_flutter/morty/presentation/model/morty_ui_model.dart';
 
+import '../../../base/pagination/widgets/base_list_view_bloc.dart';
 import '../../../morty_details/morty_details_screen.dart';
 import '../../../settings/presentation/screen/setting_screen.dart';
 import '../widgets/morty_app_bar.dart';
@@ -75,7 +75,7 @@ class _MortyScreenState extends State<MortyScreen> {
           },
           scrollController: scrollController,
         ),
-        body: BaseListView<MortyUIModel>(
+        body: BaseListViewBloc<MortyUIModel>(
             scrollController: scrollController,
             pagingSource: getIt.get(),
             item: (model) {

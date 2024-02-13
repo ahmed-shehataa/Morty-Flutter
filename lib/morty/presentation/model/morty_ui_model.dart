@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:morty_flutter/base/pagination/base_paging_model.dart';
+import 'package:morty_flutter/base/pagination/model/base_paging_model.dart';
 
 class MortyUIModel extends BasePagingModel {
   final int id;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:morty_flutter/base/pagination/retry_button.dart';
+import 'package:morty_flutter/base/pagination/widgets/retry_button.dart';
 import 'package:morty_flutter/core/common/constants/svg.dart';
 
 class BaseErrorWidget extends StatelessWidget {

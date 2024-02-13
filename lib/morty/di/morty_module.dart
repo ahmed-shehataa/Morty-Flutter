@@ -1,4 +1,4 @@
-import 'package:morty_flutter/base/pagination/base_paging_source.dart';
+import 'package:morty_flutter/base/pagination/abstracts/base_paging_source.dart';
 import 'package:morty_flutter/morty/data/dio/service/morty_service.dart';
 import 'package:morty_flutter/morty/data/local/morty_local_data_source.dart';
 import 'package:morty_flutter/morty/data/remote/morty_remote_data_source_impl.dart';

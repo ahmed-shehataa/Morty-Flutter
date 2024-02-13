@@ -1,14 +1,17 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:morty_flutter/base/pagination/base_error_widget.dart';
-import 'package:morty_flutter/base/pagination/base_paging_model.dart';
-import 'package:morty_flutter/base/pagination/base_paging_source.dart';
-import 'package:morty_flutter/base/pagination/paging_state.dart';
+import 'package:morty_flutter/base/pagination/abstracts/base_paging_source.dart';
+import 'package:morty_flutter/base/pagination/model/base_paging_model.dart';
+import 'package:morty_flutter/base/pagination/widgets/base_error_widget.dart';
 import 'package:morty_flutter/core/network/extensions/handle_exception.dart';
 
+import '../consatnts/constants.dart';
+import '../enums/paging_state.dart';
 import 'base_empty_widget.dart';
-import 'constants.dart';
 
+@Deprecated('''
+Recommended to use the newer [BaseListViewBloc] version which built using [Bloc]
+''')
 class BaseListView<T extends BasePagingModel> extends StatefulWidget {
   final BasePagingSource pagingSource;
   final Widget Function(BasePagingModel) item;
