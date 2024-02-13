@@ -16,13 +16,13 @@ class BaseListViewBloc<T extends BasePagingModel> extends StatefulWidget {
   final Widget loadingWidget;
   final ScrollController scrollController;
 
-   BaseListViewBloc({
+  const BaseListViewBloc({
     required this.item,
     required this.pagingSource,
+    required this.scrollController,
     this.loadingWidget = const Center(child: CircularProgressIndicator()),
     super.key,
-    scrollController
-  }) : scrollController =  ScrollController();
+  });
 
   @override
   State<BaseListViewBloc> createState() => _BaseListViewState();
