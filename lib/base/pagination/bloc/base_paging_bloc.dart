@@ -24,8 +24,10 @@ class BasePagingBloc extends Bloc<BasePagingEvent, BasePagingState> {
       await loadNextPage(emit);
     }, transformer: droppable());
 
-    // first fire to load first page
-    add(LoadNextPageEvent());
+    if(!basePagingSource.isLazy) {
+      // first fire to load first page
+      add(LoadNextPageEvent());
+    }
   }
 
   Future<void> loadNextPage(Emitter<BasePagingState> emit) async {

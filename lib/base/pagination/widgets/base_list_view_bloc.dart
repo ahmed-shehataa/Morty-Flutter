@@ -46,6 +46,7 @@ class BaseListViewBloc<T extends BasePagingModel> extends StatelessWidget {
     } else if (state.pagingState == PagingState.failureAtFirst) {
       return Center(child: _errorWidget(state, context));
     } else if (state.list.isEmpty) {
+      // TODO handle refresh
       return const Center(child: BaseEmptyWidget());
     } else {
       return ListView.builder(
