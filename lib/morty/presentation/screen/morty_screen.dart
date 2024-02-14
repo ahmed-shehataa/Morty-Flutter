@@ -42,7 +42,7 @@ class _MortyScreenState extends State<MortyScreen> {
 
   _fabWidget() {
     return FloatingActionButton(
-      //shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(50))),
+      backgroundColor: Theme.of(context).colorScheme.onPrimary,
       child: IconButton(
         onPressed: null,
         icon: Icon(

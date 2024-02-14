@@ -55,7 +55,9 @@ class _MortyAppBarState extends State<MortyAppBar> {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      height: _showAppbar ? Scaffold.of(context).appBarMaxHeight : 0.0,
+      height: _showAppbar
+          ? Scaffold.of(context).appBarMaxHeight
+          : MediaQuery.of(context).padding.top,
       duration: const Duration(milliseconds: 200),
       child: AppBar(
         elevation: 2,

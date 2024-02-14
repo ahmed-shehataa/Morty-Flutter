@@ -16,12 +16,12 @@ const lightColors = ColorScheme(
 
 const darkColors = ColorScheme(
   brightness: Brightness.dark,
-  primary: Color(0xFF004F98),
+  primary: Color(0xFF007ff5),
   onPrimary: Color(0xFFFFFFFF),
   secondary: Color(0xFFBBBBBB),
   onSecondary: Color(0xFFEAEAEA),
-  error: Color(0xFFA1120E),
-  onError: Color(0xFFa11111),
+  error: Color(0xFFD22B2B),
+  onError: Color(0xFFD22B2B),
   background: Color(0xFF393939),
   onBackground: Color(0xFF505050),
   surface: Color(0xFF505050),
