@@ -37,6 +37,7 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
     on<ChangeAppLocalEvent>(
       (event, emit) {
         _setLocalUseCase.execute(event.appLocale);
+        emit(state.copy(appLocal: event.appLocale));
       },
     );
     on<ChangeAppThemeEvent>(

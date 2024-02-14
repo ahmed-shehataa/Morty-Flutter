@@ -18,7 +18,6 @@ class SettingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final SettingBloc settingBloc = getIt.get();
     return Scaffold(
         appBar: AppBar(
           leading: BackButton(color: Theme.of(context).colorScheme.onPrimary),
@@ -32,99 +31,105 @@ class SettingScreen extends StatelessWidget {
           ),
           backgroundColor: Theme.of(context).colorScheme.background,
         ),
-        body: BlocConsumer<SettingBloc, SettingState>(
-          bloc: settingBloc,
-          listener: (context, state) {
-            if (state.isLoggedOut) {
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => const LoginScreen()));
-            }
-          },
-          builder: (BuildContext context, SettingState state) {
-            return SettingsList(
-              lightTheme: SettingsThemeData(
-                  titleTextColor: Theme.of(context).colorScheme.onPrimary,
-                  settingsListBackground:
-                      Theme.of(context).colorScheme.background),
-              darkTheme: SettingsThemeData(
-                  titleTextColor: Theme.of(context).colorScheme.onPrimary,
-                  settingsListBackground:
-                      Theme.of(context).colorScheme.background),
-              sections: [
-                SettingsSection(
-                  title: Text("common".tr()),
-                  tiles: <SettingsTile>[
-                    SettingsTile.navigation(
-                      leading: const Icon(Icons.language),
-                      title: Text("language".tr()),
-                      value: Text(state.appLocal.getDisplayLanguage()),
-                      onPressed: (context) {
-                        context.showLocalDialog(
-                          state.appLocal,
-                          (selectedLocale) {
-                            settingBloc.add(
-                                ChangeAppLocalEvent(appLocale: selectedLocale));
-                            context.setLocale(selectedLocale);
-                          },
-                        );
-                      },
-                    ),
-                    SettingsTile.navigation(
-                      onPressed: (context) {
-                        context.showThemeDialog(
-                          state.appTheme,
-                          (appTheme) {
-                            settingBloc
-                                .add(ChangeAppThemeEvent(appTheme: appTheme));
-                            MyApp.of(context)!.changeTheme(appTheme);
-                          },
-                        );
-                      },
-                      leading: const Icon(Icons.format_paint),
-                      title: Text("theme".tr()),
-                      value: Text(state.appTheme.getName()),
-                    ),
-                  ],
-                ),
-                SettingsSection(
-                  title: Text("dev".tr()),
-                  tiles: <SettingsTile>[
-                    SettingsTile.navigation(
-                      leading: const Icon(Icons.developer_mode),
-                      title: Text("clear_cache".tr()),
-                      onPressed: (context) {
-                        settingBloc.add(ClearCacheEvent());
-                        Fluttertoast.showToast(msg: "Cache cleared ✅");
-                      },
-                    ),
-                  ],
-                ),
-                SettingsSection(
-                  title: Text("account".tr()),
-                  tiles: <SettingsTile>[
-                    SettingsTile.navigation(
-                      onPressed: (_context) {
-                        context.showLogoutDialog(
-                          () {
-                            settingBloc.add(LogoutEvent());
-                          },
-                        );
-                      },
-                      leading: Icon(
-                        Icons.logout,
-                        color: Theme.of(context).colorScheme.onError,
+        body: BlocProvider(
+          create: (context) => getIt.get<SettingBloc>(),
+          child: BlocConsumer<SettingBloc, SettingState>(
+            listener: (context, state) {
+              if (state.isLoggedOut) {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const LoginScreen()));
+              }
+            },
+            builder: (BuildContext context, SettingState state) {
+              return SettingsList(
+                lightTheme: SettingsThemeData(
+                    titleTextColor: Theme.of(context).colorScheme.onPrimary,
+                    settingsListBackground:
+                        Theme.of(context).colorScheme.background),
+                darkTheme: SettingsThemeData(
+                    titleTextColor: Theme.of(context).colorScheme.onPrimary,
+                    settingsListBackground:
+                        Theme.of(context).colorScheme.background),
+                sections: [
+                  SettingsSection(
+                    title: Text("common".tr()),
+                    tiles: <SettingsTile>[
+                      SettingsTile.navigation(
+                        leading: const Icon(Icons.language),
+                        title: Text("language".tr()),
+                        value: Text(state.appLocal.getDisplayLanguage()),
+                        onPressed: (context) {
+                          context.showLocalDialog(
+                            state.appLocal,
+                            (selectedLocale) {
+                              context.read<SettingBloc>().add(
+                                  ChangeAppLocalEvent(
+                                      appLocale: selectedLocale));
+                              context.setLocale(selectedLocale);
+                            },
+                          );
+                        },
                       ),
-                      title: Text(
-                        "logout".tr(),
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.onError),
+                      SettingsTile.navigation(
+                        onPressed: (context) {
+                          context.showThemeDialog(
+                            state.appTheme,
+                            (appTheme) {
+                              context
+                                  .read<SettingBloc>()
+                                  .add(ChangeAppThemeEvent(appTheme: appTheme));
+                              MyApp.of(context)!.changeTheme(appTheme);
+                            },
+                          );
+                        },
+                        leading: const Icon(Icons.format_paint),
+                        title: Text("theme".tr()),
+                        value: Text(state.appTheme.getName()),
                       ),
-                    ),
-                  ],
-                ),
-              ],
-            );
-          },
+                    ],
+                  ),
+                  SettingsSection(
+                    title: Text("dev".tr()),
+                    tiles: <SettingsTile>[
+                      SettingsTile.navigation(
+                        leading: const Icon(Icons.developer_mode),
+                        title: Text("clear_cache".tr()),
+                        onPressed: (context) {
+                          context.read<SettingBloc>().add(ClearCacheEvent());
+                          Fluttertoast.showToast(msg: "Cache cleared ✅");
+                        },
+                      ),
+                    ],
+                  ),
+                  SettingsSection(
+                    title: Text("account".tr()),
+                    tiles: <SettingsTile>[
+                      SettingsTile.navigation(
+                        onPressed: (context) {
+                          context.showLogoutDialog(
+                            () {
+                              context.read<SettingBloc>().add(LogoutEvent());
+                            },
+                          );
+                        },
+                        leading: Icon(
+                          Icons.logout,
+                          color: Theme.of(context).colorScheme.onError,
+                        ),
+                        title: Text(
+                          "logout".tr(),
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.onError),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              );
+            },
+          ),
         ));
   }
 }
