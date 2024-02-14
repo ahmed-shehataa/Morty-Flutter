@@ -5,6 +5,7 @@ import 'package:morty_flutter/user/domain/use_case/get_is_logged_in_use_case.dar
 import 'package:morty_flutter/user/domain/use_case/get_local_use_case.dart';
 import 'package:morty_flutter/user/domain/use_case/get_theme_use_case.dart';
 import 'package:morty_flutter/user/domain/use_case/get_user_data_use_case.dart';
+import 'package:morty_flutter/user/domain/use_case/set_is_logged_in_use_case.dart';
 import 'package:morty_flutter/user/domain/use_case/set_local_use_case.dart';
 import 'package:morty_flutter/user/domain/use_case/set_theme_use_case.dart';
 import 'package:morty_flutter/user/domain/use_case/set_user_data_use_case.dart';
@@ -29,6 +30,7 @@ userModule() async {
   getIt.registerFactory(() => GetUserDataUseCase(getIt.get()));
   getIt.registerFactory(() => SetUserLogoutUseCase(getIt.get()));
   getIt.registerFactory(() => GetIsLoggedInUseCase(getIt.get()));
+  getIt.registerFactory(() => SetIsLoggedInUseCase(getIt.get()));
   getIt.registerFactory(() => SetLocalUseCase(getIt.get()));
   getIt.registerFactory(() => GetLocalUseCase(getIt.get()));
   getIt.registerFactory(() => GetThemeUseCase(getIt.get()));

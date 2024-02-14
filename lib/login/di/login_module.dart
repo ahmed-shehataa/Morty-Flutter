@@ -19,5 +19,6 @@ loginModule() {
   getIt.registerFactory(() => LoginByEmailUseCase(getIt.get()));
 
   // ui
-  getIt.registerFactory(() => LoginNotifier(getIt.get(), getIt.get()));
+  getIt.registerFactory(
+      () => LoginNotifier(getIt.get(), getIt.get(), getIt.get()));
 }

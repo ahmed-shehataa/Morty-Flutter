@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:morty_flutter/core/theme/constants.dart';
+import 'package:morty_flutter/login/presentation/screen/login_screen.dart';
 import 'package:morty_flutter/morty/presentation/screen/morty_screen.dart';
 import 'package:morty_flutter/splash/presentation/screen/splash_screen.dart';
 import 'package:morty_flutter/theme/app_theme.dart';
@@ -59,7 +60,7 @@ class _MyAppState extends State<MyApp> {
       theme: getThemeData(context: context),
       darkTheme: getThemeData(context: context, isDark: true),
       themeMode: _appTheme.toThemeMode(),
-      home: const MortyScreen(),
+      home: const SplashScreen(),
     );
   }
 }

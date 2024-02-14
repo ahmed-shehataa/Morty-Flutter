@@ -20,7 +20,7 @@ class LoginScreen extends StatelessWidget {
             child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: ChangeNotifierProvider<LoginNotifier>(
-            create: (context) => LoginNotifier(getIt.get(), getIt.get()),
+            create: (context) => getIt.get(),
             child: Consumer<LoginNotifier>(
               builder:
                   (BuildContext context, LoginNotifier value, Widget? child) {
