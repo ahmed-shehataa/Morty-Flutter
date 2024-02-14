@@ -30,13 +30,13 @@ class BaseListViewBloc<T extends BasePagingModel> extends StatelessWidget {
     }, state.errorMessage);
   }
 
-  Widget _footerWidget(BasePagingState state, BuildContext context) {
+  Widget? _footerWidget(BasePagingState state, BuildContext context) {
     if (state.pagingState == PagingState.loadingNextPage) {
       return loadingWidget;
     } else if (state.pagingState == PagingState.failureAtNext) {
       return _errorWidget(state, context);
     } else {
-      return const Placeholder();
+      return null;
     }
   }
 
@@ -57,7 +57,10 @@ class BaseListViewBloc<T extends BasePagingModel> extends StatelessWidget {
             return item(state.list[index]);
           } else {
             _loadNextPageEvent(context);
-            return _footerWidget(state, context);
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: _footerWidget(state, context),
+            );
           }
         },
       );

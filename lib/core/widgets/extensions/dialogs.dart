@@ -13,14 +13,21 @@ extension LoadingDialog on BuildContext {
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Image.asset(
+          /*Image.asset(
             GifRes.loading,
             height: 60,
             width: 60,
-          ),
+          ),*/
+          const CircularProgressIndicator(),
           Container(
-              margin: const EdgeInsets.only(top: 12),
-              child: Text("loading".tr())),
+            margin: const EdgeInsets.only(top: 12),
+            child: Text(
+              "loading".tr(),
+              style: TextStyle(
+                color: Theme.of(this).colorScheme.onPrimary,
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -124,9 +131,7 @@ extension LocalDialog on BuildContext {
                     activeColor: Theme.of(this).colorScheme.primary,
                     value: supportedAppLocales[index],
                     groupValue: selectedLocaleRadio,
-                    onChanged: (value) {
-
-                    },
+                    onChanged: (value) {},
                   ),
                 ),
               );
@@ -159,7 +164,6 @@ extension LocalDialog on BuildContext {
     );
   }
 }
-
 
 extension ThemeDialog on BuildContext {
   showThemeDialog(AppTheme selectedTheme, Function(AppTheme) onConfirm) {
@@ -199,9 +203,7 @@ extension ThemeDialog on BuildContext {
                     activeColor: Theme.of(this).colorScheme.primary,
                     value: AppTheme.values.elementAt(index),
                     groupValue: selectedThemeRadio,
-                    onChanged: (value) {
-
-                    },
+                    onChanged: (value) {},
                   ),
                 ),
               );
