@@ -1,4 +1,4 @@
-import '../consatnts/constants.dart';
+import '../constants/constants.dart';
 import '../model/base_paging_model.dart';
 
 abstract class BasePagingSource<T extends BasePagingModel> {

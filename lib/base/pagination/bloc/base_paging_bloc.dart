@@ -1,9 +1,10 @@
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:morty_flutter/base/pagination/abstracts/base_paging_source.dart';
 import 'package:morty_flutter/core/network/extensions/handle_exception.dart';
 
-import '../consatnts/constants.dart';
+import '../constants/constants.dart';
 import '../enums/paging_state.dart';
 import 'base_paging_event.dart';
 import 'base_paging_state.dart';
@@ -14,29 +15,21 @@ class BasePagingBloc extends Bloc<BasePagingEvent, BasePagingState> {
   BasePagingBloc({required this.basePagingSource}) : super(BasePagingState()) {
     on<LoadNextPageEvent>((event, emit) async {
       await loadNextPage(emit);
-    });
+    }, transformer: droppable());
 
     on<RefreshEvent>((event, emit) async {
       // reset ui data
-      emit(BasePagingState(
-        currentPage: 0,
-        pagingState: PagingState.idle,
-        errorMessage: null,
-      ));
-
+      emit(BasePagingState());
       // load first page
       await loadNextPage(emit);
-    });
+    }, transformer: droppable());
+
+    // first fire to load first page
+    add(LoadNextPageEvent());
   }
 
   Future<void> loadNextPage(Emitter<BasePagingState> emit) async {
-    if (state.pagingState == PagingState.loadingFirstPage ||
-        state.pagingState == PagingState.loadingNextPage ||
-        state.pagingState == PagingState.reachedLastPage) {
-      return;
-    }
-
-    // continue loading next page
+    // PagingState.idle means that BasePagingBloc ready to load next page.
     if (state.pagingState == PagingState.idle) {
       emit(state.copy(currentPage: state.currentPage + 1));
     }
