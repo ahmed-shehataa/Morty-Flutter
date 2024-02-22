@@ -14,12 +14,10 @@ class BaseListViewBloc<T extends BasePagingModel> extends StatelessWidget {
   final BasePagingSource pagingSource;
   final Widget Function(BasePagingModel) item;
   final Widget loadingWidget;
-  final ScrollController scrollController;
 
   const BaseListViewBloc({
     required this.item,
     required this.pagingSource,
-    required this.scrollController,
     this.loadingWidget = const Center(child: CircularProgressIndicator()),
     super.key,
   });
@@ -49,20 +47,28 @@ class BaseListViewBloc<T extends BasePagingModel> extends StatelessWidget {
       // TODO handle refresh
       return const Center(child: BaseEmptyWidget());
     } else {
-      return ListView.builder(
-        controller: scrollController,
-        itemCount: state.list.length + 1,
-        itemBuilder: (context, index) {
-          if (index != state.list.length) {
-            return item(state.list[index]);
-          } else {
+      return NotificationListener<ScrollEndNotification>(
+        onNotification: (scrollInfo) {
+          if (state.pagingState != PagingState.failureAtNext &&
+              scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent &&
+              scrollInfo.metrics.atEdge) {
             _loadNextPageEvent(context);
-            return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: _footerWidget(state, context),
-            );
           }
+          return false;
         },
+        child: ListView.builder(
+          itemCount: state.list.length + 1,
+          itemBuilder: (context, index) {
+            if (index != state.list.length) {
+              return item(state.list[index]);
+            } else {
+              return Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: _footerWidget(state, context),
+              );
+            }
+          },
+        ),
       );
     }
   }

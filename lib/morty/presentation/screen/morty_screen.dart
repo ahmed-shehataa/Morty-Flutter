@@ -76,7 +76,6 @@ class _MortyScreenState extends State<MortyScreen> {
           scrollController: scrollController,
         ),
         body: BaseListViewBloc<MortyUIModel>(
-            scrollController: scrollController,
             pagingSource: getIt.get(),
             item: (model) {
               return MortyItem(
