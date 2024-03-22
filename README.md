@@ -1,6 +1,4 @@
 ## Flutter project targets Android, iOS, Web Desktop.
-
-## Compose Multiplatform AWESOME :partying_face: :partying_face: :partying_face:
 <p align="center">
   <img src="img/1.jpeg" height="450" width="220">
   <img src="img/2.jpeg" height="450" width="220">
